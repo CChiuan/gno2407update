@@ -1708,7 +1708,6 @@ nav, .topBar {
         padding: 8% 0;
         margin: 0.1em auto;
     }
-
     .feature3 {
         flex-direction: row;
     }
@@ -1758,8 +1757,8 @@ nav, .topBar {
 
     .feature2 .picture img {
         width: 500%;
-        top: -1em;
-        left: -2.6em;
+        top: -12vw;
+        left: -17vw;
     }
 
     .feature3 .picture img {
@@ -1913,6 +1912,22 @@ nav, .topBar {
         font-size: 3vw;
         font-weight: 200;
         line-height: 1.2;
+    }
+
+    .popUp-history {
+        top: 30vw;
+        left: -5vw;
+    }
+    .popUp-history1 .popUp-history-content, .popUp-history2 .popUp-history-content, .popUp-history3 .popUp-history-content, .popUp-history4 .popUp-history-content, .popUp-history5 .popUp-history-content {
+        width: 110vw;
+        height: 80vw;
+        background-position: 50% 50%;
+    }
+    .popUp-history-close {
+        width: 4vw;
+        height: 4vw;
+        top: -2vw;
+        right: 0vw;
     }
 }
 
