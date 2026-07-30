@@ -1262,8 +1262,8 @@ nav, .topBar {
 
     .feature2 .picture img {
         width: 500%;
-        top: -1em;
-        left: -2.6em;
+        top: -12vw;
+        left: -17vw;
     }
 
     .feature3 .picture img {
@@ -1291,8 +1291,8 @@ nav, .topBar {
     }
 
     .eve2-time p {
-        width: 88%;
-        font-size: 0.5rem;
+        width: 92%;
+        font-size: 3.6vw;
     }
 
     .eve2-history {
@@ -1785,7 +1785,7 @@ nav, .topBar {
     }
 
     .eve2-time p {
-        width: 92%;
+        width: 96%;
         font-size: 3.6vw;
     }
 
@@ -1808,14 +1808,14 @@ nav, .topBar {
         top: 0;
         margin: 0;
         padding: 0;
-        margin-top: 4vh;
+        margin-top: 3vh;
     }
 
     .eve2-history-award ul {
         align-items: flex-start;
         flex-direction: column;
-        gap: 0.2rem;
-        width: 54%;
+        gap: 0.16rem;
+        width: 52%;
         margin-top: 0;
         margin: 0 auto;
     }
