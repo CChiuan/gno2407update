@@ -2,8 +2,40 @@
 html, body {
     font-family: 'Noto sans TC', 'Microsoft JhengHei', Arial, Helvetica, sans-serif;
     scrollbar-color: #a13428 #020108;
-    scrollbar-width: thin;
+    scrollbar-width: none;
     -webkit-user-drag: none;
+    scroll-behavior: smooth;
+}
+
+/*---- scrollBar ----*/
+::-webkit-scrollbar {
+  height: 5px;
+  overflow: visible;
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a13428;
+  background-clip: padding-box;
+  border: solid transparent;
+  border-width: 0 0 0 0px;
+  min-height: 28px;
+  padding: 100px 0 0;
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0), inset 0 -1px 0 rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a13428;
+  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: #a13428;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-track {
+  background-color: #020108;
 }
 
 * {
@@ -29,37 +61,52 @@ a:hover, .kv-btn img:hover, .eve1-btn img:hover, .eve2-history a:hover, span img
 }
 
 .fullPage {
-    width: 100%;
-    overflow: hidden;
+    width: 100vw;
+    overflow: clip;
+    background-color: #000000;
 }
 
 
 /* main 開始 **********************************/
 
-main::before {
-    content: "";
-    position: absolute;
-    z-index: -999;
-    width: 100%;
-    height: 100%;
-    background-color: #000000;
-}
-
 main {
     position: relative;
-    background: url(../img/wrap_bg.jpg) no-repeat;
-    background-size: 100%;
-    height: 36.8rem;
+    overflow: clip;
 }
 
 main p {
     position: relative;
     margin: 0 auto;
     text-align: center;
-    font-size: 0.21em;
-    letter-spacing: 0.1em;
+    font-size: 0.21rem;
+    letter-spacing: 0.015rem;
     line-height: 1.3;
     color: #eee3d6;
+}
+
+.kv, .event1, .event2 {
+    position: relative;
+    z-index: 1;
+}
+
+.kv {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.kv-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../img/kv_bg.jpg) no-repeat center center;
+    background-size: cover;
+    transform-origin: center center;
+    z-index: 0;
+    will-change: transform;
 }
 
 .kv-content-mob {
@@ -68,10 +115,12 @@ main p {
 
 .kv-content {
     user-select: none;
-    width: 100%;
     position: relative;
+    width: 100%;
+    height: 100vh;
     top: 0;
     left: 0;
+    z-index: 10;
 }
 
 .kv-slg1 {
@@ -81,31 +130,36 @@ main p {
 }
 
 .kv-slg1 img {
-    width: 34%;
+    width: 36vw;
     position: relative;
-    padding-top: 10.2%;
-    left: 11%;
+    padding-top: 14vh;
+    left: 8vw;
+}
+
+.content-box {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 21vh;
+    z-index: 10;
 }
 
 .kv-logo, .kv-slg2, .kv-btn {
-    position: relative;
-    display: flex;
-    justify-content: center;
+    position: absolute;
 }
 
 .kv-logo {
-    top: 1.6rem;
     opacity: 0;
     animation: fadeInUp 0.2s cubic-bezier(0.33,1.5,0.66,1) forwards;
     animation-delay: 0.8s;
 }
 
 .kv-logo img {
-    width: 17%;
+    width: 22vh;
 }
 
 .kv-slg2 {
-    top: 1.1rem;
+    top: 9vh;
     opacity: 0;
     animation: fadeInUp 0.2s cubic-bezier(0.33,1.5,0.66,1) forwards;
     animation-delay: 0.9s;
@@ -116,21 +170,18 @@ main p {
 }
 
 .kv-slg2 img {
-    width: 50%;
+    width: 70vh;
 }
 
 .kv-btn {
-    top: 0.9rem;
+    top: 22vh;
     opacity: 0;
     animation: fadeInUp 2s cubic-bezier(0.33,1.5,0.66,1) forwards;
     animation-delay: 1.5s;
 }
 
 .kv-btn img {
-    width: 4.2em;
-}
-
-.kv-btn a {
+    width: 33vh;
     animation: scaled 0.2s cubic-bezier(0, 1.2, 1, 1) 3s alternate infinite;
     transition: all 0.2s ease;
 }
@@ -141,14 +192,31 @@ main p {
     animation: paused;
 }
 
+.kv-frame {
+    background: url(../img/kv_frame.png) no-repeat;
+    background-position: center top;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform-origin: center center;
+    perspective: 500px;
+}
+
 .event1 {
+    background: url(../img/ev1_bg.jpg) no-repeat;
+    background-position: center top;
+    background-size: auto 100%;
     position: relative;
     width: 100%;
-    height: 9rem;
-    top: 3rem;
+    overflow: hidden;
 }
 
 .eve1-title {
+    margin-top: 3rem;
     height: 1rem;
     background: url(../img/section/eve1-title.png) center top no-repeat;
     background-size: 42%;
@@ -181,7 +249,7 @@ main p {
 .eve1-main-wrap {
     width: 100%;
     position: relative;
-    margin-top: 0.4em;
+    margin-top: 0.4rem;
 }
 
 .eve1-main {
@@ -385,18 +453,20 @@ main p {
     position: absolute;
     background: url(../img/G1.png) no-repeat;
     background-size: 100% auto;
-    width: 1.6em;
-    height: 1.6em;
-    top: -4.1em;
-    left: 2.2em;
+    width: 1.8rem;
+    height: 1.8rem;
+    top: -3rem;
+    left: 2.2rem;
     animation: jello 2s ease-out infinite;
 }
 
 .event2 {
+    background: url(../img/ev2_bg.jpg) no-repeat;
+    background-position: center top;
+    background-size: cover;
     position: relative;
     width: 100%;
-    height: 9rem;
-    top: 4.2rem;
+    padding: 6vh 0 20vh 0;
 }
 
 .eve2-title {
@@ -412,7 +482,8 @@ main p {
 
 .eve2-history-bg {
     background: url(../img/section/eve2-stone.png) no-repeat;
-    background-size: 100%;
+    background-position: center center;
+    background-size: cover;
     width: 64%;
     height: 5.1em;
     margin: 0 auto;
@@ -586,13 +657,16 @@ main p {
 /* footer 開始 **********************************/
 
 footer {
-    position: relative;
     width: 100%;
-    height: 250px;
-    top: 8.4em;
+    padding: 6vh 0 3vh 0;
+    background-color: #000000;
+    position: sticky;
+    bottom: 0px;
+    z-index: 0;
 }
 
 .footer-content {
+    position: relative;
     display: flex;
     gap: 0.2em;
     margin: 0 auto;
@@ -655,7 +729,7 @@ footer {
 /* sideBar 開始 **********************************/
 
 aside {
-    display: none;
+    position: relative;
 }
 
 .ios:hover, .adr:hover {
@@ -753,7 +827,7 @@ aside {
     background-position: -204% 0;
 }
 
-.topBar {
+nav, .topBar {
     display: none;
 }
 
@@ -794,18 +868,17 @@ aside {
 .popUp-login-close, .popUp-recived-close, .popUp-history-close {
     display: block;
     position: relative;
-    top: -0.1em;
-    left: 7.2em;
-    width: 0.4em;
-    height: 0.4em;
+    width: 0.48rem;
+    height: 0.48rem;
     background: url(../img/popup/close.png) no-repeat;
     background-size: 100%;
     transition: all 0.3s ease-out;
 }
 
 .popUp-history-close {
-    top: 0.1em;
-    left: 12.7em;
+    position: absolute;
+    top: 0rem;
+    right: 2.4rem;
 }
 
 .popUp-login-close:hover, .popUp-recived-close:hover, .popUp-history-close:hover {
@@ -828,68 +901,71 @@ aside {
     width: 38%;
     height: 4.4em;
     margin: 0 auto;
-    background: url(../img/popup/popup_award-recived.png) center no-repeat;
-    background-size: 100%;
+    background: url(../img/popup/popup_award-recived.png) no-repeat;
+    background-position: center top;
+    background-size: 100% auto;
 }
 
 /* popUp3 */
 .popUp-history5 .popUp-history-content {
-    width: 68%;
-    height: 9em;
+    width: 14rem;
+    height: 9.3rem;
     margin: 0 auto;
-    background: url(../img/popup/popup_history_05.png) center no-repeat;
-    background-size: 100%;
+    background: url(../img/popup/popup_history_05.png) no-repeat;
+    background-position: center top;
+    background-size: 100% auto;
 }
 
 .popUp-history4 .popUp-history-content {
-    width: 68%;
-    height: 9em;
+    width: 14rem;
+    height: 9.3rem;
     margin: 0 auto;
     background: url(../img/popup/popup_history_04.png) center no-repeat;
-    background-size: 100%;
+    background-size: 100% auto;
 }
 
 .popUp-history3 .popUp-history-content {
-    width: 68%;
-    height: 9em;
+    width: 14rem;
+    height: 9.3rem;
     margin: 0 auto;
     background: url(../img/popup/popup_history_03.png) center no-repeat;
-    background-size: 100%;
+    background-size: 100% auto;
 }
 
 .popUp-history2 .popUp-history-content {
-    width: 68%;
-    height: 9em;
+    width: 14rem;
+    height: 9.3rem;
     margin: 0 auto;
     background: url(../img/popup/popup_history_02.png) center no-repeat;
-    background-size: 100%;
+    background-size: 100% auto;
 }
 
 .popUp-history1 .popUp-history-content {
-    width: 68%;
-    height: 9em;
+    width: 14rem;
+    height: 9.3rem;
     margin: 0 auto;
     background: url(../img/popup/popup_history_01.png) center no-repeat;
-    background-size: 100%;
+    background-size: 100% auto;
 }
 
 /* popUp 結束 **********************************/
 
 
-
 /* tablet */
-@media screen and (max-width: 999px) {
-
-    main {
-        position: relative;
-        background: url(../img/mob/wrap_bg.jpg) no-repeat top center;
-        background-size: 100% auto;
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    nav, .topBar {
+        display: block;
+    }
+    .kv {
         width: 100%;
-        height: 136rem;
+        height: 100vh;
+        background: url(../img/mob/wrap_bg_1.jpg) no-repeat center -18vh;
+        background-size: auto 128%;
+        z-index: 0;
     }
 
-    main p {
-        font-size: 0.3em;
+    .kv-bg {
+        display: none;        
     }
 
     .kv-content {
@@ -898,7 +974,9 @@ aside {
 
     .kv-content-mob {
         display: block;
-        padding-top: 23%;
+        position: absolute;
+        bottom: 30vh;
+        width: 100%;
     }
 
     .kv-slg2 {
@@ -906,7 +984,8 @@ aside {
     }
 
     .kv-content-mob .kv-slg2-mob {
-        top: 0;
+        position: relative;
+        top: -54vh;
         opacity: 0;
         animation: fadeInUp 0.2s cubic-bezier(0.33,1.5,0.66,1) forwards;
         animation-delay: 0.9s;
@@ -921,20 +1000,21 @@ aside {
     }
 
     .kv-content-mob .kv-slg2-mob img {
-        width: 77%;
+        width: 48vh;
         position: absolute;
     }
 
     .kv-content-mob .kv-logo {
-        top: 0;
-        padding-top: 75%;
+        display: flex;
+        justify-content: center;
+        width: 100%;
         opacity: 0;
         animation: fadeInUp 0.2s cubic-bezier(0.33,1.5,0.66,1) forwards;
         animation-delay: 0.8s;
     }
     
     .kv-content-mob .kv-logo img {
-        width: 40%;
+        width: 24vh;
         top: 0;
     }
 
@@ -942,27 +1022,29 @@ aside {
         display: flex;
         justify-content: center;
         position: relative;
-        top: 0;
+        top: 10vh;
         width: 100%;
         animation: fadeInUp 0.2s cubic-bezier(0.33,1.5,0.66,1) forwards;
         animation-delay: 0.9s;
     }
 
     .kv-content-mob .kv-slg1 img {
-        width: 86%;
+        width: 56vh;
         left: 0;
         padding-top: 0;
     }
 
     .kv-content-mob .kv-btn {
-        top: 0rem;
+        display: flex;
+        justify-content: center;
+        width: 100%;    
         opacity: 0;
         animation: fadeInUp 2s cubic-bezier(0.33,1.5,0.66,1) forwards;
         animation-delay: 1.5s;
     }
 
     .kv-content-mob .kv-btn a {
-        width: 62%;
+        width: 41vh;
         display: flex;
         justify-content: center;
     }
@@ -977,27 +1059,29 @@ aside {
 
     .sideBar-btn li {
         margin-top: 0em;
+        width: 19vw;
     }
-
     .topBar {
-        display: block;
+        display: flex;
+        justify-content: center;
         position: fixed;
         width: 100%;
-        height: 13%;
+        height: 14vw;
         top: 0;
         left: 0;
         z-index: 999;
         background: url(../img/mob/nav_bg.jpg) no-repeat;
         background-size: 100%;
     }
-
     .sideBar-btn {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
         width: 100%;
-        height: 100%;
-        top: 0em; 
-        left: 0.2em;
+        height: auto;
+        top: 0; 
+        left: 2vw;
     }
-
     .topBar_slg {
         width: 18%;
         position: relative;
@@ -1005,53 +1089,53 @@ aside {
         left: 0;
         float: left;
     }
-
     .topBar_slg img {
         position: relative;
-        top: 0;
+        top: 0.2vw;
         left: 0;
         width: 100%;
     }
-
     .ios {
-        width: 26%;
-        height: 1.8em;
+        width: 130%;
+        height: 12vw;
         position: relative;
-        top: 0.12em;
+        top: 1.8vw;
+        left: -3vw;
         background: url(../img/aside/ios.png) no-repeat;
         background-size: 100%;
-        float: left;
     }
-
     .adr {
-        width: 26%;
-        height: 1.8em;
+        width: 136%;
+        height: 12vw;
         position: relative;
-        top: 0.12em;
+        top: 1.7vw;
         background: url(../img/aside/adr.png) no-repeat;
         background-size: 100%;
-        float: left;
     }
-
     .sns {
         position: relative;
-        left: 1%;
-    }
-
-    .fb {
-        width: 64%;
-        height: 2em;
+        top: 0.8vw;
+        left: 1vw;
+        width: 30vw;
+        justify-content: space-evenly;
         position: relative;
-        top: 0.12em;
-        left: 6%;
+    }
+    .sns li {
+        width: auto;
+    }
+    .fb {
+        width: 10vw;
+        height: 11vw;
+        position: relative;
+        top: 0.2vw;
+        left: 0;
         background-size: 214%;
     }
-    
     .baha {
-        width: 64%;
-        height: 2em;
+        width: 10vw;
+        height: 11vw;
         position: relative;
-        top: 0.12em;
+        top: 0.2vw;
         left: 0;
         background-size: 214%;
         background-position: 100% 0;
@@ -1059,20 +1143,24 @@ aside {
 
     .event1 {
         padding-top: 24%;
-        padding-bottom: 180%;
+        padding-bottom: 8vh;
         top: 0;
+        background-image:url(../img/ev1_bg_01.jpg), url(../img/ev1_bg_01.jpg),url(../img/ev1_bg_02.png);
+        background-repeat: no-repeat, no-repeat, repeat-y;
+        background-position: 41% 0%, 41% 100%, bottom;
+        background-size: auto 10vh, auto 10vh, 100% auto;
     }
 
     .eve1-title {
-        width: 86%;
+        width: 88%;
         height: 100px;
         background-size: 100% auto;
         margin: 0 auto;
     }
 
     .eve1-text p {
-        width: 86%;
-        font-size: 21px;
+        width: 80%;
+        font-size: 0.5rem;
     }
 
     .eve1-main {
@@ -1084,8 +1172,8 @@ aside {
 
     .eve1-btn {
         display: block;
-        margin: 0 20%;
-        margin-top: 38%;
+        margin: 0 22%;
+        margin-top: 32%;
     }
 
     .eve1-btn a {
@@ -1117,7 +1205,7 @@ aside {
 
     .feature1, .feature2, .feature3, .feature4 {
         width: 80%;
-        height: 2em;
+        height: 4rem;
         padding: 10% 0;
         margin: 0.1em auto;
     }
@@ -1132,6 +1220,7 @@ aside {
 
     .info {
         top: 1em;
+        width: 54%;
     }
 
     .feature1 .info, .feature3 .info {
@@ -1139,29 +1228,32 @@ aside {
     }
 
     .feature1 .info .sub, .feature2 .info .sub, .feature3 .info .sub, .feature4 .info .sub, .feature5 .info .sub {
-        width: 2em;
-        height: 0.9em;
+        width: 18vw;
+        height: 8vw;
     }
 
     .feature1 .info .title, .feature2 .info .title, .feature3 .info .title, .feature4 .info .title, .feature5 .info .title {
-        width: 5em;
-        height: 1em;
+        width: 42vw;
+        height: 8vw;
     }
 
     .info p {
-        width: 80%;
+        width: 42vw;
         margin: 0;
-        font-size: 21px;
+        font-size: 0.6rem;
     }
 
     .picture-box {
         background-size: cover;
+        padding-top: 93%;
     }
 
     .picture-content {
-        width: 92%;
-        height: 200px;
-        left: 0.09em;
+        width: 33vw;
+        height: 31vw;
+        left: 1.6vw;
+        top: 1vw;
+        border-radius: 2vw;
     }
 
     .feature2 .picture img {
@@ -1170,61 +1262,82 @@ aside {
         left: -2.6em;
     }
 
+    .feature3 .picture img {
+        top: -13vw;
+        right: 216%;
+    }
+    .eve1-character .g1 {
+        width: 18vw;
+        height: 18vw;
+        top: auto;
+        bottom: 0;
+        left: 60vw;
+    }
+
     .event2 {
         top: 0;
         height: auto;
-        padding-top: 300px;
     }
 
     .eve2-title {
-        width: 86%;
+        width: 88%;
         height: 76px;
         background-size: 100% auto;
         margin: 0 auto;
     }
 
     .eve2-time p {
-        width: 86%;
-        font-size: 24px;
+        width: 88%;
+        font-size: 0.5rem;
     }
 
     .eve2-history {
         top: 0;
-        padding-top: 5%;
+        margin-top: 4vh;
     }
 
     .eve2-history-bg {
         background: url(../img/mob/stone.png) no-repeat;
-        background-size: 100%;
-        width: 80%;
-        height: 1500px;
+        background-size: 100% auto;
+        width: 84vw;
+        height: 192vw;
         margin: 0 auto;
     }
 
     .eve2-history-award {
-        /* top: 30px; */
-        padding-top: 10%;
-        padding-right: 10%;
-        position: absolute;
+        width: 100%;
         user-select: none;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        margin-top: 5vh;
     }
 
     .eve2-history-award ul {
-        display: block;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.2rem;
+        width: 54%;
         margin-top: 0;
+        margin: 0 auto;
     }
 
     .eve2-history-award li {
-        width: 70%;
+        width: 30vw;
+    }
+
+    #chick2, #chick4 {
+        position: relative;
+        padding-left: 90%;
     }
 
     .eve2-text {
-        width: 86%;
+        width: 88%;
     }
 
     .eve2-text p {
-        padding: 1em 2em 2.6em 2em;
-        font-size: 21px;
+        padding: 1rem 1rem;
+        font-size: 0.6rem;
     }
 
     .left-position {
@@ -1232,22 +1345,22 @@ aside {
         left: -10%;
     }
 
-    .g1, .g2, .g3 {
+    .g2, .g3 {
         display: none;
     }
 
     footer {
         position: relative;
         width: 100%;
-        height: 320px;
         top: 0;
         bottom: 0;
         background-color: #000000;
+        padding: 6vh 0;
     }
 
     .footer-content {
         display: block;
-        width: 66%;
+        width: 76%;
         padding-left: 0;
     }
 
@@ -1258,7 +1371,7 @@ aside {
     }
 
     .vng .logo-vng {
-        width: 60%;
+        width: 46%;
         margin: 0 auto;
     }
 
@@ -1276,7 +1389,7 @@ aside {
     }
 
     .age .icon-age {
-        width: 14%;
+        width: 10%;
         margin: 0 auto;
     }
 
@@ -1290,17 +1403,507 @@ aside {
 
     .vng .text p, .age .text p {
         text-align: center;
-        font-size: 14px;
+        font-size: 0.4rem;
+        font-weight: 200;
+        line-height: 1.2;
     }
-
-
 }
-
-
+@media screen and (orientation: landscape) and (max-width: 950px) and (pointer: coarse) {
+            .portrait-mode {
+                display: flex !important;
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
+                top: 0;
+                left: 0;
+                background: rgba(0, 0, 0, 0.9);
+                z-index: 10000;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+            .portrait-mode p {
+                font-size: 24px;
+                color: #fff;
+                margin-bottom: 12px;
+            }
+            .portrait-mode {
+                display: none;
+            }
+}
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(90deg); }
+        }
+        .portrait-mode {
+            display: none;
+        }
 
 /* mobile */
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 767px) {
+    .kv {
+        width: 100%;
+        height: 100vh;
+        background: url(../img/mob/wrap_bg_1.jpg) no-repeat center -10vh;
+        background-size: auto 110%;
+        z-index: 0;
+    }
+    .kv-bg {
+        display: none;        
+    }
+    .kv-content {
+        display: none;
+    }
+    .kv-content-mob {
+        display: block;
+        position: absolute;
+        bottom: 38vh;
+        width: 100%;
+    }
+    .kv-slg2 {
+        display: none;
+    }
+    .kv-content-mob .kv-slg2-mob {
+        position: relative;
+        top: -45vh;
+        opacity: 0;
+        animation: fadeInUp 0.2s cubic-bezier(0.33,1.5,0.66,1) forwards;
+        animation-delay: 0.9s;
+    }
+    .kv-content-mob .kv-slg2-mob {
+        display: flex;
+        justify-content: center;
+        opacity: 0;
+        animation: fadeInLeft 0.3s cubic-bezier(0.33,1.2,0.66,1) forwards;
+        animation-delay: 0.3s;
+    }
+    .kv-content-mob .kv-slg2-mob img {
+        width: 72vw;
+        position: absolute;
+    }
+    .kv-content-mob .kv-logo {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        opacity: 0;
+        animation: fadeInUp 0.2s cubic-bezier(0.33,1.5,0.66,1) forwards;
+        animation-delay: 0.8s;
+    }
+    .kv-content-mob .kv-logo img {
+        width: 24vh;
+        top: 0;
+    }
+    .kv-content-mob .kv-slg1 {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        top: 10vh;
+        width: 100%;
+        animation: fadeInUp 0.2s cubic-bezier(0.33,1.5,0.66,1) forwards;
+        animation-delay: 0.9s;
+    }
+    .kv-content-mob .kv-slg1 img {
+        width: 92vw;
+        left: 0;
+        padding-top: 0;
+    }
+    .kv-content-mob .kv-btn {
+        display: flex;
+        justify-content: center;
+        width: 100%;    
+        opacity: 0;
+        animation: fadeInUp 2s cubic-bezier(0.33,1.5,0.66,1) forwards;
+        animation-delay: 1.5s;
+    }
 
+    .kv-content-mob .kv-btn a {
+        width: 62vw;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .kv-content-mob .kv-btn img {
+        width: 100%;
+    }
 
+    .sideBar {
+        display: none;
+    }
+    nav, .topBar {
+        display: block;
+    }
+    .sideBar-btn li {
+        margin-top: 0em;
+        width: 19vw;
+    }
+    .topBar {
+        display: flex;
+        justify-content: center;
+        position: fixed;
+        width: 100%;
+        height: 14vw;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        background: url(../img/mob/nav_bg.jpg) no-repeat;
+        background-size: 100%;
+    }
+    .sideBar-btn {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        width: 100%;
+        height: auto;
+        top: 0; 
+        left: 2vw;
+    }
+    .topBar_slg {
+        width: 18%;
+        position: relative;
+        top: 0.2vw;
+        left: 0;
+        float: left;
+    }
+    .topBar_slg img {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+    .ios {
+        width: 130%;
+        height: 12vw;
+        position: relative;
+        top: 1.8vw;
+        left: -3vw;
+        background: url(../img/aside/ios.png) no-repeat;
+        background-size: 100%;
+    }
+    .adr {
+        width: 136%;
+        height: 12vw;
+        position: relative;
+        top: 1.7vw;
+        background: url(../img/aside/adr.png) no-repeat;
+        background-size: 100%;
+    }
+    .sns {
+        position: relative;
+        top: 0.8vw;
+        left: 1vw;
+        width: 30vw;
+        justify-content: space-evenly;
+        position: relative;
+    }
+    .sns li {
+        width: auto;
+    }
+    .fb {
+        width: 10vw;
+        height: 11vw;
+        position: relative;
+        top: 0.2vw;
+        left: 0;
+        background-size: 214%;
+    }
+    .baha {
+        width: 10vw;
+        height: 11vw;
+        position: relative;
+        top: 0.2vw;
+        left: 0;
+        background-size: 214%;
+        background-position: 100% 0;
+    }
 
+    .event1 {
+        padding-top: 36%;
+        padding-bottom: 0;
+        top: 0;
+        background-image:url(../img/ev1_bg_01.jpg), url(../img/ev1_bg_01.jpg),url(../img/ev1_bg_02.png);
+        background-repeat: no-repeat, no-repeat, repeat-y;
+        background-position: 41% 0%, 41% 100%, bottom;
+        background-size: auto 10vh, auto 10vh, 100% auto;
+    }
+
+    .eve1-title {
+        width: 88%;
+        background-size: 100% auto;
+        margin: 0 auto;
+    }
+
+    .eve1-text p {
+        width: 80%;
+        font-size: 4vw;
+    }
+
+    .eve1-main {
+        position: absolute;
+        width: 66%;
+        top: 0.4%;
+        left: 19%;
+    }
+
+    .eve1-btn {
+        display: block;
+        margin: 0 18%;
+        margin-top: 58%;
+    }
+
+    .eve1-btn a {
+        display: block;
+        width: 100%;
+        filter: brightness(1.02);
+        animation: pulse 0.8s ease infinite;
+    }
+
+    .eve1-btn img {
+        width: 100%;
+    }
+
+    .align-up {
+        position: relative;
+        top: -172px;
+    }
+
+    .feature-wrap-box {
+        padding-top: 46%;
+    }
+    
+    .feature-wrap {
+        width: 100%;
+        display: block;
+        position: relative;
+        padding-top: 0%;
+    }
+
+    .feature1, .feature2, .feature3, .feature4 {
+        width: 80%;
+        padding: 8% 0;
+        margin: 0.1em auto;
+    }
+
+    .feature3 {
+        flex-direction: row;
+    }
+    
+    .feature4 {
+        flex-direction: row-reverse;
+    }
+
+    .info {
+        top: 2vw;
+        width: 54%;
+    }
+
+    .feature1 .info, .feature3 .info {
+        top: 2vw;
+        left: 3%;
+    }
+
+    .feature1 .info .sub, .feature2 .info .sub, .feature3 .info .sub, .feature4 .info .sub, .feature5 .info .sub {
+        width: 18vw;
+        height: 8vw;
+    }
+
+    .feature1 .info .title, .feature2 .info .title, .feature3 .info .title, .feature4 .info .title, .feature5 .info .title {
+        width: 42vw;
+        height: 8vw;
+    }
+
+    .info p {
+        width: 42vw;
+        margin: 0;
+        font-size: 4vw;
+    }
+
+    .picture-box {
+        background-size: cover;
+        padding-top: 93%;
+    }
+
+    .picture-content {
+        width: 33vw;
+        height: 31vw;
+        left: 1.6vw;
+        top: 1vw;
+        border-radius: 2vw;
+    }
+
+    .feature2 .picture img {
+        width: 500%;
+        top: -1em;
+        left: -2.6em;
+    }
+
+    .feature3 .picture img {
+        top: -13vw;
+        right: 216%;
+    }
+    .eve1-character .g1 {
+        top: auto;
+        bottom: 14vw;
+        left: 60vw;
+    }
+
+    .event2 {
+        top: 0;
+        height: auto;
+        padding-bottom: 12vh;
+    }
+
+    .eve2-title {
+        width: 90%;
+        background-size: 100% auto;
+        margin: 0 auto;
+    }
+
+    .eve2-time p {
+        width: 92%;
+        font-size: 3.6vw;
+    }
+
+    .eve2-history {
+        top: 0;
+        margin-top: 4vh;
+    }
+
+    .eve2-history-bg {
+        background: url(../img/mob/stone.png) no-repeat;
+        background-size: 100% auto;
+        width: 84vw;
+        height: 192vw;
+        margin: 0 auto;
+    }
+
+    .eve2-history-award {
+        width: 100%;
+        user-select: none;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        margin-top: 4vh;
+    }
+
+    .eve2-history-award ul {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.2rem;
+        width: 54%;
+        margin-top: 0;
+        margin: 0 auto;
+    }
+
+    .eve2-history-award li {
+        width: 30vw;
+    }
+
+    #chick1 {
+        right: -7vw;
+    }
+
+    #chick3 {
+        right: 0vw;
+    }
+
+    #chick2, #chick4 {
+        position: relative;
+        padding-left: 100%;
+    }
+
+    .eve2-text {
+        width: 88%;
+    }
+
+    .eve2-text p {
+        height: 78vw;
+        padding: 6vw 6vw 6vw 7vw;
+        font-size: 4vw;
+    }
+
+    .left-position {
+        position: relative;
+        left: -10%;
+    }
+
+    .g2, .g3 {
+        display: none;
+    }
+
+    footer {
+        position: relative;
+        width: 100%;
+        top: 0;
+        bottom: 0;
+        background-color: #000000;
+        padding: 3vh 0 6vh 0;
+    }
+
+    .footer-content {
+        display: block;
+        width: 90%;
+        padding-left: 0;
+    }
+
+    .vng {
+        width: 100%;
+        flex-wrap: wrap;
+        margin-bottom: 8%;
+    }
+
+    .vng .logo-vng {
+        width: 46%;
+        margin: 0 auto;
+    }
+
+    .vng img {
+        top: 0;
+    }
+
+    .vng .text {
+        width: 100%;
+    }
+
+    .age {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .age .icon-age {
+        width: 10%;
+        margin: 0 auto;
+    }
+
+    .age .icon-age img {
+        top: 0;
+    }
+
+    .age .text {
+        width: 100%;
+    }
+
+    .vng .text p, .age .text p {
+        text-align: center;
+        font-size: 3vw;
+        font-weight: 200;
+        line-height: 1.2;
+    }
+}
+
+/* topBar捲動顯示 */
+@media screen and (max-width: 1024px) {
+    .topBar {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-100%);
+        transition: opacity .4s ease, transform .4s ease, visibility .4s ease;
+    }
+    .topBar.is-show {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
 }
