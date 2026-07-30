@@ -844,7 +844,8 @@ nav, .topBar {
     top: 0;
     left: 0;
     z-index: 998;
-    background: rgba(0, 0, 0,0.7);
+    background: rgba(0, 0, 0,0.72);
+    backdrop-filter: blur(6px);
 }
 
 .popUp-login, .popUp-recived, .popUp-history {
@@ -960,7 +961,7 @@ nav, .topBar {
         width: 100%;
         height: 100vh;
         background: url(../img/mob/wrap_bg_1.jpg) no-repeat center -18vh;
-        background-size: auto 128%;
+        background-size: 102% auto;
         z-index: 0;
     }
 
@@ -1217,6 +1218,9 @@ nav, .topBar {
     .feature4 {
         flex-direction: row-reverse;
     }
+    .feature4 .picture img {
+        right: 4vw;
+    }
 
     .info {
         top: 1em;
@@ -1344,6 +1348,12 @@ nav, .topBar {
         position: relative;
         left: -10%;
     }
+    #chick1 {
+        right: -7vw;
+    }
+    #chick3 {
+        right: -3vw;
+    }
 
     .g2, .g3 {
         display: none;
@@ -1400,12 +1410,27 @@ nav, .topBar {
     .age .text {
         width: 100%;
     }
-
     .vng .text p, .age .text p {
         text-align: center;
         font-size: 0.4rem;
         font-weight: 200;
         line-height: 1.2;
+    }
+
+    .popUp-history {
+        top: 20vw;
+        left: -5vw;
+    }
+    .popUp-history1 .popUp-history-content, .popUp-history2 .popUp-history-content, .popUp-history3 .popUp-history-content, .popUp-history4 .popUp-history-content, .popUp-history5 .popUp-history-content {
+        width: 110vw;
+        height: 80vw;
+        background-position: 50% 50%;
+    }
+    .popUp-history-close {
+        width: 4vw;
+        height: 4vw;
+        top: -2vw;
+        right: 0vw;
     }
 }
 @media screen and (orientation: landscape) and (max-width: 950px) and (pointer: coarse) {
